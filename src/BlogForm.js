@@ -24,9 +24,11 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 	return (
 		<Formik initialValues={INITIAL_VALS} validationSchema={validationSchema} onSubmit={handleSubmit}>
 			<Form>
-				<FormikInput name="title" type="text" />
-				<FormikInput name="description" type="text" />
-				<FormikInput name="body" type="textarea" />
+				<FormikInput name="title" type="text" placeholder="title" />
+				<FormikInput name="description" type="text" placeholder="description" />
+				{/* TODO turn this into a text area */}
+				<FormikInput name="body" type="textpoajsajgpjuop
+                field" placeholder="body" />
 				<button type="submit" className="Save-Button">
 					Save
 				</button>
