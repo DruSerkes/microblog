@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-// import { v4 as uuid } from 'uuid';
 import BlogForm from './BlogForm';
 
 const Routes = () => {
@@ -10,9 +9,14 @@ const Routes = () => {
 		if (id in blogs) {
 			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
 		} else {
-			// const newId = uuid();
 			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
 		}
+	};
+
+	const removeBlog = (id) => {
+		const updatedBlogs = { ...blogs };
+		delete updatedBlogs.id;
+		setBlogs(updatedBlogs);
 	};
 
 	return (
