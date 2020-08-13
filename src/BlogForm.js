@@ -4,6 +4,7 @@ import { Formik, Form } from 'formik';
 import { v4 as uuid } from 'uuid';
 import validationSchema from './blogSchema';
 import FormikInput from './FormikInput';
+import MyTextArea from './FormikArea';
 
 const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => {
 	const INITIAL_VALS = { title, description, body };
@@ -27,8 +28,8 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 				<FormikInput name="title" type="text" placeholder="title" />
 				<FormikInput name="description" type="text" placeholder="description" />
 				{/* TODO turn this into a text area */}
-				<FormikInput name="body" type="textpoajsajgpjuop
-                field" placeholder="body" />
+				<MyTextArea name="body" placeholder="body..." />
+				{/* <FormikInput name="body" type="textfield" placeholder="body" /> */}
 				<button type="submit" className="Save-Button">
 					Save
 				</button>

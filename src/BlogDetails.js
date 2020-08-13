@@ -3,8 +3,8 @@ import BlogForm from './BlogForm';
 import { useParams } from 'react-router-dom';
 
 const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
-	const id = useParams();
-
+	const { id } = useParams();
+	console.log(blogs);
 	const { title, description, body } = blogs[id];
 
 	const handleRemove = () => {
