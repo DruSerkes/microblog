@@ -9,9 +9,9 @@ const Routes = () => {
 
 	const saveBlog = ({ title, description, body, id }) => {
 		if (id in blogs) {
-			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
+			setBlogs((blogs) => ({ ...blogs, [id]: { ...blogs[id], title, description, body, id } }));
 		} else {
-			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
+			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id, comments: [] } }));
 		}
 	};
 
@@ -21,14 +21,20 @@ const Routes = () => {
 		setBlogs(updatedBlogs);
 	};
 
+	const addComment = (id, commentId, text) => {
+		const post = blogs[id];
+		const newComment = { id: commentId, text };
+		post.comments = [ ...post.comments, newComment ];
+		setBlogs((blogs) => ({ ...blogs, [id]: post }));
+	};
+
 	return (
 		<Switch>
 			<Route exact path="/add">
 				<BlogForm saveBlog={saveBlog} />
 			</Route>
 			<Route exact path="/:id">
-				<h2>Post details</h2>
-				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
+				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} addComment={addComment} />
 			</Route>
 			<Route exact path="/">
 				{/* <h2>Blog</h2> */}
