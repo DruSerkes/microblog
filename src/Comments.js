@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
-
+import CommentForm from './CommentForm';
 
 const Comments = ({ addComment, blogs, removeComment }) => {
 	const { id } = useParams();
@@ -22,6 +22,7 @@ const Comments = ({ addComment, blogs, removeComment }) => {
 					/>
 				))}
 			</ul>
+			<CommentForm addComment={addComment} />
 		</div>
 	);
 };

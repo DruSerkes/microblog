@@ -7,12 +7,12 @@ import commentSchema from './commentSchema';
 
 const CommentForm = ({ addComment }) => {
 	const { id } = useParams();
-	const handleSubmit = (values, { setSubmitting }) => {
+	const handleSubmit = (values, { setSubmitting, resetForm }) => {
 		const commentId = uuid();
 		const { text } = values;
 		addComment(id, commentId, text);
 		setSubmitting(false);
-		// values.text = '';
+		resetForm();
 	};
 
 	return (
