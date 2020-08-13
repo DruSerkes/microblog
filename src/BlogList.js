@@ -8,7 +8,7 @@ const BlogList = ({ blogs }) => {
 		<div className="BlogList">
 			{blogIds.map((id) => {
 				let { title, description } = blogs[id];
-				return <BlogCard title={title} description={description} id={id} />;
+				return <BlogCard title={title} description={description} id={id} key={id} />;
 			})}
 		</div>
 	);

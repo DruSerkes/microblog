@@ -1,10 +1,14 @@
 import React from 'react';
 import BlogForm from './BlogForm';
 import { useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 	const { id } = useParams();
-	console.log(blogs);
+	if (!blogs[id]) {
+		return <h3>Sorry we can't find your post!!</h3>;
+	}
 	const { title, description, body } = blogs[id];
 
 	const handleRemove = () => {
@@ -18,12 +22,12 @@ const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 	return (
 		<div className="BlogDetails">
 			<h2>{title}</h2>
-			<p>
+			<p className="BlogDetails-Icons">
 				<span onClick={handleEdit}>
-					<i class="fas fa-edit" />
-				</span>{' '}
+					<FontAwesomeIcon icon={faEdit} />
+				</span>
 				<span onClick={handleRemove}>
-					<i class="fas fa-trash-alt" />
+					<FontAwesomeIcon icon={faTrashAlt} />
 				</span>
 			</p>
 			<p>
