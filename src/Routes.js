@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import BlogForm from './BlogForm';
+import Homepage from './Homepage';
+import BlogDetails from './BlogDetails';
 
 const Routes = () => {
-	const [ blogs, setBlogs ] = useState(null);
+	const [ blogs, setBlogs ] = useState({});
 
 	const saveBlog = ({ title, description, body, id }) => {
 		if (id in blogs) {
@@ -26,9 +28,11 @@ const Routes = () => {
 			</Route>
 			<Route exact path="/:id">
 				<h2>Post details</h2>
+				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
 			</Route>
 			<Route exact path="/">
-				<h2>Blog</h2>
+				{/* <h2>Blog</h2> */}
+				<Homepage blogs={blogs} />
 			</Route>
 			<Redirect to="/" />
 		</Switch>

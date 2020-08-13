@@ -2,8 +2,11 @@ import React from 'react';
 import BlogForm from './BlogForm';
 import { useParams } from 'react-router-dom';
 
-const BlogDetails = ({ title, description, body, saveBlog, removeBlog }) => {
+const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 	const id = useParams();
+
+	const { title, description, body } = blogs[id];
+
 	const handleRemove = () => {
 		removeBlog(id);
 	};
