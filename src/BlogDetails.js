@@ -6,9 +6,7 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 	const { id } = useParams();
-	if (!blogs[id]) {
-		return <h3>Sorry we can't find your post!!</h3>;
-	}
+	if (!blogs[id]) return <h3>Sorry we can't find your post!!</h3>;
 	const { title, description, body } = blogs[id];
 
 	const handleRemove = () => {

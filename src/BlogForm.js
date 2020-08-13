@@ -16,7 +16,6 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 		} else {
 			values.id = id;
 		}
-		console.log(values);
 		saveBlog(values);
 		setSubmitting(false);
 		history.push('/');
@@ -27,9 +26,7 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 			<Form>
 				<FormikInput name="title" type="text" placeholder="title" />
 				<FormikInput name="description" type="text" placeholder="description" />
-				{/* TODO turn this into a text area */}
 				<MyTextArea name="body" placeholder="body..." />
-				{/* <FormikInput name="body" type="textfield" placeholder="body" /> */}
 				<button type="submit" className="Save-Button">
 					Save
 				</button>
