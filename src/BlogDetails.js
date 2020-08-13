@@ -15,20 +15,28 @@ const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 		removeBlog(id);
 	};
 
-	const handleEdit = () => {
-		return <BlogForm title={title} description={description} body={body} id={id} saveBlog={saveBlog} />;
+	const toggleEditForm = () => {
+		const form = document.querySelector('.BlogDetails-Edit-BlogForm');
+		if (form.style.display === 'none') {
+			form.style.display = 'block';
+		} else {
+			form.style.display = 'none';
+		}
 	};
 
 	return (
 		<div className="BlogDetails">
+			<div className="BlogDetails-Edit-BlogForm" style={{ display: 'none' }}>
+				<BlogForm title={title} description={description} body={body} id={id} saveBlog={saveBlog} />
+			</div>
 			<h2>{title}</h2>
 			<p className="BlogDetails-Icons">
-				<span onClick={handleEdit}>
+				<button onClick={toggleEditForm}>
 					<FontAwesomeIcon icon={faEdit} />
-				</span>
-				<span onClick={handleRemove}>
+				</button>
+				<button onClick={handleRemove}>
 					<FontAwesomeIcon icon={faTrashAlt} />
-				</span>
+				</button>
 			</p>
 			<p>
 				<em>{description}</em>
