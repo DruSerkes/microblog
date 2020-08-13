@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 import BlogForm from './BlogForm';
 
 const Routes = () => {
 	const [ blogs, setBlogs ] = useState(null);
 
-	const saveBlog = ({ title, description, body }) => {
-		setBlogs((blogs) => [ ...blogs, { title, description, body, id: uuid() } ]);
+	const saveBlog = ({ title, description, body, id }) => {
+		if (id in blogs) {
+			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
+		} else {
+			// const newId = uuid();
+			setBlogs((blogs) => ({ ...blogs, [id]: { title, description, body, id } }));
+		}
 	};
 
 	return (
