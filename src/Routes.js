@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
+import BlogForm from './BlogForm';
 
 const Routes = () => {
 	const [ blogs, setBlogs ] = useState(null);
@@ -12,7 +13,7 @@ const Routes = () => {
 	return (
 		<Switch>
 			<Route exact path="/add">
-				<h2>Add</h2>
+				<BlogForm saveBlog={saveBlog} />
 			</Route>
 			<Route exact path="/:id">
 				<h2>Post details</h2>
