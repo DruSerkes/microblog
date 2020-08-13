@@ -4,12 +4,13 @@ import { Formik, Form } from 'formik';
 import validationSchema from './blogSchema';
 import FormikInput from './FormikInput';
 
-const BlogForm = ({ title = '', description = '', body = '' }) => {
+const BlogForm = ({ title = '', description = '', body = '', saveBlog }) => {
 	const INITIAL_VALS = { title, description, body };
 	const history = useHistory();
 
 	const handleSubmit = (values, { setSubmitting }) => {
-		// do stuff with the values
+        // TODO do stuff with the values
+        // saveBlog(values)
 		console.log(values);
 		setSubmitting(false);
 		history.push('/');
