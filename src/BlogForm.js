@@ -24,15 +24,15 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 	return (
 		<Formik initialValues={INITIAL_VALS} validationSchema={validationSchema} onSubmit={handleSubmit}>
 			<Form>
-				<FormikInput name="title" type="text" placeholder="title" />
-				<FormikInput name="description" type="text" placeholder="description" />
-				<MyTextArea name="body" placeholder="body..." />
+				<FormikInput label="Title" name="title" type="text" />
+				<FormikInput label="Description" name="description" type="text" />
+				<MyTextArea label="Body" name="body" />
 				<button type="submit" className="Save-Button">
 					Save
 				</button>
-				<button className="Cancel">
-					<Link to="/">Cancel</Link>
-				</button>
+				<Link to="/">
+					<button className="Cancel">Cancel</button>
+				</Link>
 			</Form>
 		</Formik>
 	);

@@ -1,38 +1,121 @@
 .App {
-  text-align: center;
+	text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+	height: 40vmin;
+	pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+	.App-logo {
+		animation: App-logo-spin infinite 20s linear;
+	}
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+	background-color: #282c34;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
+	color: white;
 }
 
-.App-link {
-  color: #61dafb;
+a {
+	color: #61dafb;
+	margin-right: 1rem;
+	text-decoration: none;
 }
+
+.Navbox {
+	text-align: left;
+	padding: 2rem;
+}
+
+.BlogList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.BlogCard {
+	border: 1px solid grey;
+	border-radius: 5px;
+	margin: 2rem;
+	padding: 2rem;
+}
+
+button {
+	border: 1px solid indigo;
+	background-color: indigo;
+	color: white;
+	border-radius: 5px;
+	margin: 0.3rem;
+	padding: 0.3rem 0.7rem;
+	text-align: center;
+}
+
+button:hover {
+	background-color: whitesmoke;
+	color: black;
+}
+
+/* .Cancel {
+	border: 1px solid indigo;
+	background-color: indigo;
+	color: white;
+	border-radius: 5px;
+	margin: 0.5rem;
+	padding: 0.3rem 0.7rem;
+	text-align: center;
+} */
+
+.Cancel a {
+	margin: 0;
+	color: white;
+}
+
+.Cancel button:hover {
+	background-color: whitesmoke;
+	color: black;
+}
+
+form {
+	width: 70vw;
+	margin: 0 auto;
+}
+
+input,
+textarea {
+	display: block;
+	width: 100%;
+	margin: 0.5rem auto;
+	border-radius: 5px;
+	border: 1px solid grey;
+}
+
+input {
+	height: 1.5rem;
+}
+
+.error {
+	color: red;
+	text-align: left;
+}
+
+/* .Cancel a:hover {
+	background-color: whitesmoke;
+	color: black;
+} */
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
 }
