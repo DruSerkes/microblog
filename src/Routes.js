@@ -17,7 +17,7 @@ const Routes = () => {
 
 	const removeBlog = (id) => {
 		const updatedBlogs = { ...blogs };
-		delete updatedBlogs.id;
+		delete updatedBlogs[id];
 		setBlogs(updatedBlogs);
 	};
 
