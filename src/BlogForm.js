@@ -6,11 +6,13 @@ import FormikInput from './FormikInput';
 
 const BlogForm = ({ title = '', description = '', body = '' }) => {
 	const INITIAL_VALS = { title, description, body };
+	const history = useHistory();
 
 	const handleSubmit = (values, { setSubmitting }) => {
 		// do stuff with the values
 		console.log(values);
 		setSubmitting(false);
+		history.push('/');
 	};
 
 	return (
