@@ -63,16 +63,6 @@ button:hover {
 	color: black;
 }
 
-/* .Cancel {
-	border: 1px solid indigo;
-	background-color: indigo;
-	color: white;
-	border-radius: 5px;
-	margin: 0.5rem;
-	padding: 0.3rem 0.7rem;
-	text-align: center;
-} */
-
 .Cancel a {
 	margin: 0;
 	color: white;
@@ -106,10 +96,43 @@ input {
 	text-align: left;
 }
 
-/* .Cancel a:hover {
-	background-color: whitesmoke;
-	color: black;
-} */
+.Comments {
+	width: 95vw;
+	margin: 0 auto;
+}
+
+.Comments h3 {
+	margin: 1rem;
+	font-size: 1.5rem;
+}
+
+.Comment {
+	list-style-type: none;
+	text-align: left;
+	position: relative;
+	margin-bottom: 1.5rem;
+}
+
+.Comment span {
+	margin-right: 0.8rem;
+}
+
+.Comment i {
+	position: absolute;
+	left: 0;
+}
+
+.Comment span:hover {
+	cursor: pointer;
+}
+
+.CommentForm {
+	text-align: left;
+}
+
+.CommentForm button {
+	margin: 0.3rem 0;
+}
 
 @keyframes App-logo-spin {
 	from {

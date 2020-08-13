@@ -17,7 +17,7 @@ const CommentForm = ({ addComment }) => {
 
 	return (
 		<Formik initialValues={{ text: '' }} validationSchema={commentSchema} onSubmit={handleSubmit}>
-			<Form>
+			<Form className="CommentForm">
 				<FormikInput placeholder="New Comment" name="text" type="text" />
 				<button type="submit">Add</button>
 			</Form>

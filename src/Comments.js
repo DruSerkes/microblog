@@ -10,6 +10,7 @@ const Comments = ({ addComment, blogs, removeComment }) => {
 
 	return (
 		<div className="Comments">
+			<hr />
 			<h3>Comments</h3>
 			<ul>
 				{comments.map((comment) => (
