@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import Comment from './Comment';
 
+
 const Comments = ({ addComment, blogs, removeComment }) => {
 	const { id } = useParams();
 	if (!blogs[id]) return null;
