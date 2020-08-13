@@ -3,6 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import BlogForm from './BlogForm';
 import Homepage from './Homepage';
 import BlogDetails from './BlogDetails';
+import Comments from './Comments';
 
 const Routes = () => {
 	const [ blogs, setBlogs ] = useState({});
@@ -28,13 +29,25 @@ const Routes = () => {
 		setBlogs((blogs) => ({ ...blogs, [id]: post }));
 	};
 
+	const removeComment = (id, commentId) => {
+		const post = blogs[id];
+		const newComments = post.comments.filter((comment) => comment.id !== commentId);
+		post.comments = newComments;
+		setBlogs((blogs) => ({ ...blogs, [id]: post }));
+	};
+
 	return (
 		<Switch>
 			<Route exact path="/add">
 				<BlogForm saveBlog={saveBlog} />
 			</Route>
 			<Route exact path="/:id">
-				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} addComment={addComment} />
+				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
+				<Comments addComment={addComment} blogs={blogs} removeComment={removeComment} />
+				{/* TODO do I drill this addComment prop to the form rendered by the comments rendered by BlogDetails? 
+				OR 
+				do I render comments here and drill / grab the props I need therein? 
+				*/}
 			</Route>
 			<Route exact path="/">
 				{/* <h2>Blog</h2> */}
