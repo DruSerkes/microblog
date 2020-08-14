@@ -12,25 +12,25 @@ const postReducer = (state = INITIAL_STATE, action) => {
 		case EDIT_POST:
 			return {
 				...state,
-				posts: {
+				posts : {
 					...state.posts,
 					[action.id]: {
-						...state.posts[id],
-						title: action.post.title,
-						description: action.post.description,
-						body: action.post.body
+						...state.posts[action.id],
+						title       : action.post.title,
+						description : action.post.description,
+						body        : action.post.body
 					}
 				}
 			};
 		case ADD_COMMENT:
-			const post = state.posts[action.id];
-			post.comments = [ ...post.comments, action.comment ];
-			return { ...state, posts: { ...state.posts, [action.id]: post } };
+			const postToAddTo = state.posts[action.id];
+			postToAddTo.comments = [ ...post.comments, action.comment ];
+			return { ...state, posts: { ...state.posts, [action.id]: postToAddTo } };
 		case REMOVE_COMMENT:
-			const post = state.posts[action.id];
-			const newComments = post.comments.filter((comment) => comment.id !== action.commentId);
-			post.comments = newComments;
-			return { ...state, posts: { ...state.posts, [action.id]: post } };
+			const postToRemoveFrom = state.posts[action.id];
+			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
+			postToRemoveFrom.comments = newComments;
+			return { ...state, posts: { ...state.posts, [action.id]: postToRemoveFrom } };
 		default:
 			return state;
 	}
