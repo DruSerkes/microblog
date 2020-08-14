@@ -1,5 +1,5 @@
-const INITIAL_STATE = {};
 import { ADD_POST, EDIT_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT } from './actionTypes';
+const INITIAL_STATE = {};
 
 const postReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
@@ -20,6 +20,8 @@ const postReducer = (state = INITIAL_STATE, action) => {
 			const newComments = post.comments.filter((comment) => comment.id !== action.commentId);
 			post.comments = newComments;
 			return { ...state, posts: { ...posts, [action.id]: post } };
+		default:
+			return state;
 	}
 };
 
