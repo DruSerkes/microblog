@@ -44,9 +44,9 @@ const Routes = () => {
 			<Route exact path="/:id">
 				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
 				<Comments addComment={addComment} blogs={blogs} removeComment={removeComment} />
-				{/* TODO do I drill this addComment prop to the form rendered by the comments rendered by BlogDetails? 
-				OR 
-				do I render comments here and drill / grab the props I need therein? 
+				{/* 
+				TODO move Comments into BlogDetails
+				BlogDetails handles all Redux, passes down needed logic to children
 				*/}
 			</Route>
 			<Route exact path="/">
