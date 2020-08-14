@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useCallback } from 'react';
 import BlogForm from './BlogForm';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { removePostAndTitle, editPostAndTitle, addComment } from './reducers/actions';
+import { removePostAndTitle, editPostAndTitle, addComment, removeComment } from './reducers/actions';
 
 const BlogDetails = () => {
 	const { id } = useParams();
@@ -21,17 +21,20 @@ const BlogDetails = () => {
 		dispatch(editPostAndTitle(values));
 	};
 
-	const handleAddComment = (comment) => {
-		dispatch(addComment(id, comment));
-		setPost((post) => ({ ...post }));
-	};
-	useEffect(
-		() => {
-			console.log('inside effect!');
-			console.log('redux post ', postFromRedux);
-			setPost(postFromRedux);
+	const handleAddComment = useCallback(
+		(comment) => {
+			dispatch(addComment(id, comment));
+			setPost({ ...postFromRedux });
 		},
-		[ handleAddComment ]
+		[ dispatch, id, postFromRedux ]
+	);
+
+	const handleRemoveComment = useCallback(
+		(postId, commentId) => {
+			dispatch(removeComment(postId, commentId));
+			setPost({ ...postFromRedux });
+		},
+		[ dispatch, postFromRedux ]
 	);
 
 	if (!postFromRedux) return <h3>Sorry, we can't find your post!</h3>;
@@ -65,7 +68,7 @@ const BlogDetails = () => {
 				<em>{description}</em>
 			</p>
 			<p>{body}</p>
-			<Comments id={id} comments={post.comments} />
+			<Comments id={id} comments={post.comments} removeComment={handleRemoveComment} />
 			<CommentForm addComment={handleAddComment} />
 		</div>
 	);
