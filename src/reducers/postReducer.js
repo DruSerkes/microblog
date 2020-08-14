@@ -22,3 +22,5 @@ const postReducer = (state = INITIAL_STATE, action) => {
 			return { ...state, posts: { ...posts, [action.id]: post } };
 	}
 };
+
+export default postReducer;
