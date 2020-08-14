@@ -12,7 +12,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
 		case EDIT_POST:
 			return { ...state, posts: { ...posts, [action.id]: action.post } };
 		case ADD_COMMENT:
-			const post = state.posts[action.postId];
+			const post = state.posts[action.id];
 			post.comments = [ ...post.comments, action.comment ];
 			return { ...state, posts: { ...posts, [action.id]: post } };
 		case REMOVE_COMMENT:
