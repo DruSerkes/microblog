@@ -10,7 +10,18 @@ const postReducer = (state = INITIAL_STATE, action) => {
 			delete updatedPosts[action.id];
 			return { ...state, posts: updatedPosts };
 		case EDIT_POST:
-			return { ...state, posts: { ...state.posts, [action.id]: action.post } };
+			return {
+				...state,
+				posts: {
+					...state.posts,
+					[action.id]: {
+						...state.posts[id],
+						title: action.post.title,
+						description: action.post.description,
+						body: action.post.body
+					}
+				}
+			};
 		case ADD_COMMENT:
 			const post = state.posts[action.id];
 			post.comments = [ ...post.comments, action.comment ];

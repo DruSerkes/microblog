@@ -9,7 +9,30 @@ import {
 	REMOVE_TITLE
 } from './actionTypes';
 
-// export function addPostAndTitle({id, title, description, })
+export function addPostAndTitle({ id, title, description, body }) {
+	return function(dispatch) {
+		const newTitle = { id, title, description };
+		const post = { id, title, description, body, comments: [] };
+		dispatch(addPost(id, post));
+		dispatch(addTitle(id, newTitle));
+	};
+}
+
+export function editPostAndTitle({ id, title, description, body }) {
+	return function(dispatch) {
+		const newTitle = { id, title, description };
+		const post = { id, title, description, body };
+		dispatch(editPost(id, post));
+		dispatch(editTitle(id, newTitle));
+	};
+}
+
+export function removePostAndTitle(id) {
+	return function(dispatch) {
+		dispatch(removePost(id));
+		dispatch(removeTitle(id));
+	};
+}
 
 export function addTitle(id, title) {
 	return {
