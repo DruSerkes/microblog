@@ -4,14 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
-import { createStore, compose, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers/rootReducer';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+// import {compose} from 'redux
+// const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+// const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)));
+// this was another way I figured out how to create a store before I read the notes in step 4
 
 ReactDOM.render(
 	<React.StrictMode>
