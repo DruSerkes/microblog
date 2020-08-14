@@ -8,7 +8,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
 		case REMOVE_POST:
 			const updatedPosts = { ...state };
 			delete updatedPosts[action.id];
-			return { updatedPosts };
+			return { ...updatedPosts };
 		case EDIT_POST:
 			return {
 				...state,

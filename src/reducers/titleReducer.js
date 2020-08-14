@@ -8,7 +8,7 @@ const titleReducer = (state = INITIAL_STATE, action) => {
 		case REMOVE_TITLE:
 			const updatedTitles = { ...state };
 			delete updatedTitles[action.id];
-			return { updatedTitles };
+			return { ...updatedTitles };
 		case EDIT_TITLE:
 			return { ...state, [action.id]: action.title };
 		default:
