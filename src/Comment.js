@@ -1,10 +1,13 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { removeComment } from './reducers/actions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
-const Comment = ({ id, text, removeComment, postId }) => {
+const Comment = ({ id, text, postId }) => {
+	const dispatch = useDispatch();
 	const handleRemove = () => {
-		removeComment(postId, id);
+		dispatch(removeComment(postId, id));
 	};
 
 	return (

@@ -45,7 +45,7 @@ const Routes = () => {
 			</Route>
 			<Route exact path="/:id">
 				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
-				<Comments addComment={addComment} blogs={blogs} removeComment={removeComment} />
+				{/* <Comments addComment={addComment} blogs={blogs} removeComment={removeComment} /> */}
 				{/* 
 				TODO move Comments into BlogDetails
 				BlogDetails handles all Redux, passes down needed logic to children
@@ -53,7 +53,7 @@ const Routes = () => {
 			</Route>
 			<Route exact path="/">
 				{/* <h2>Blog</h2> */}
-				<Homepage blogs={blogs} />
+				<Homepage />
 			</Route>
 			<Redirect to="/" />
 		</Switch>

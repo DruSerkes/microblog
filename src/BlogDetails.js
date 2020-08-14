@@ -1,17 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import BlogForm from './BlogForm';
+import Comments from './Comments';
+import CommentForm from './CommentForm';
+import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { removePostAndTitle, editPostAndTitle, addComment } from './reducers/actions';
 
-const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
+const BlogDetails = () => {
 	const { id } = useParams();
-	if (!blogs[id]) return <h3>Sorry we can't find your post!!</h3>;
-	const { title, description, body } = blogs[id];
-
+	const dispatch = useDispatch();
+	const postFromRedux = useSelector((state) => state.posts[id]);
+	const [ post, setPost ] = useState(postFromRedux);
 	const handleRemove = () => {
-		removeBlog(id);
+		dispatch(removePostAndTitle(id));
 	};
+
+	const updateBlog = (values) => {
+		dispatch(editPostAndTitle(values));
+	};
+
+	const handleAddComment = (comment) => {
+		dispatch(addComment(id, comment));
+		setPost((post) => ({ ...post }));
+	};
+	useEffect(
+		() => {
+			console.log('inside effect!');
+			console.log('redux post ', postFromRedux);
+			setPost(postFromRedux);
+		},
+		[ handleAddComment ]
+	);
+
+	if (!postFromRedux) return <h3>Sorry, we can't find your post!</h3>;
+
+	const { title, description, body } = post;
 
 	const toggleEditForm = () => {
 		const form = document.querySelector('.BlogDetails-Edit-BlogForm');
@@ -25,7 +50,7 @@ const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 	return (
 		<div className="BlogDetails">
 			<div className="BlogDetails-Edit-BlogForm" style={{ display: 'none' }}>
-				<BlogForm title={title} description={description} body={body} id={id} saveBlog={saveBlog} />
+				<BlogForm title={title} description={description} body={body} id={id} saveBlog={updateBlog} />
 			</div>
 			<h2>{title}</h2>
 			<p className="BlogDetails-Icons">
@@ -40,6 +65,8 @@ const BlogDetails = ({ blogs, saveBlog, removeBlog }) => {
 				<em>{description}</em>
 			</p>
 			<p>{body}</p>
+			<Comments id={id} comments={post.comments} />
+			<CommentForm addComment={handleAddComment} />
 		</div>
 	);
 };
