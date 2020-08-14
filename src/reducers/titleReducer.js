@@ -10,7 +10,7 @@ const titleReducer = (state = INITIAL_STATE, action) => {
 			delete updatedTitles[action.id];
 			return { ...state, titles: updatedTitles };
 		case EDIT_TITLE:
-			return { ...state, titles: { ...state.titles, [action.id]: action.post } };
+			return { ...state, titles: { ...state.titles, [action.id]: action.title } };
 		default:
 			return state;
 	}

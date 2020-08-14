@@ -1,4 +1,38 @@
-import { ADD_COMMENT, ADD_POST, REMOVE_COMMENT, REMOVE_POST, EDIT_POST } from './actionTypes';
+import {
+	ADD_COMMENT,
+	ADD_POST,
+	REMOVE_COMMENT,
+	REMOVE_POST,
+	EDIT_POST,
+	ADD_TITLE,
+	EDIT_TITLE,
+	REMOVE_TITLE
+} from './actionTypes';
+
+// export function addPostAndTitle({id, title, description, })
+
+export function addTitle(id, title) {
+	return {
+		type  : ADD_TITLE,
+		id,
+		title
+	};
+}
+
+export function editTitle(id, title) {
+	return {
+		type  : EDIT_TITLE,
+		id,
+		title
+	};
+}
+
+export function removeTitle(id) {
+	return {
+		type : REMOVE_TITLE,
+		id
+	};
+}
 
 export function addPost(id, post) {
 	return {
