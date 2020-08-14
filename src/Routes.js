@@ -4,6 +4,7 @@ import BlogForm from './BlogForm';
 import Homepage from './Homepage';
 import BlogDetails from './BlogDetails';
 import Comments from './Comments';
+import AddBlog from './AddBlog';
 
 const Routes = () => {
 	const [ blogs, setBlogs ] = useState({});
@@ -39,7 +40,8 @@ const Routes = () => {
 	return (
 		<Switch>
 			<Route exact path="/add">
-				<BlogForm saveBlog={saveBlog} />
+				{/* <BlogForm saveBlog={saveBlog} /> */}
+				<AddBlog />
 			</Route>
 			<Route exact path="/:id">
 				<BlogDetails saveBlog={saveBlog} removeBlog={removeBlog} blogs={blogs} />
