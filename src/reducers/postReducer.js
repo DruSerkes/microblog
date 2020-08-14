@@ -4,33 +4,30 @@ const INITIAL_STATE = {};
 const postReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case ADD_POST:
-			return { ...state, posts: { ...state.posts, [action.id]: action.post } };
+			return { ...state, [action.id]: action.post };
 		case REMOVE_POST:
-			const updatedPosts = { ...state.posts };
+			const updatedPosts = { ...state };
 			delete updatedPosts[action.id];
-			return { ...state, posts: updatedPosts };
+			return { updatedPosts };
 		case EDIT_POST:
 			return {
 				...state,
-				posts : {
-					...state.posts,
-					[action.id]: {
-						...state.posts[action.id],
-						title       : action.post.title,
-						description : action.post.description,
-						body        : action.post.body
-					}
+				[action.id]: {
+					...state[action.id],
+					title       : action.post.title,
+					description : action.post.description,
+					body        : action.post.body
 				}
 			};
 		case ADD_COMMENT:
-			const postToAddTo = state.posts[action.id];
+			const postToAddTo = state[action.id];
 			postToAddTo.comments = [ ...postToAddTo.comments, action.comment ];
-			return { ...state, posts: { ...state.posts, [action.id]: postToAddTo } };
+			return { ...state, [action.id]: postToAddTo };
 		case REMOVE_COMMENT:
-			const postToRemoveFrom = state.posts[action.id];
+			const postToRemoveFrom = state[action.id];
 			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
 			postToRemoveFrom.comments = newComments;
-			return { ...state, posts: { ...state.posts, [action.id]: postToRemoveFrom } };
+			return { ...state, [action.id]: postToRemoveFrom };
 		default:
 			return state;
 	}
