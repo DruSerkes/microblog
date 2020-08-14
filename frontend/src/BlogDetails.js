@@ -3,18 +3,20 @@ import BlogForm from './BlogForm';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { removePostAndTitle, editPostAndTitle, addComment, removeComment } from './reducers/actions';
 
 const BlogDetails = () => {
 	const { id } = useParams();
+	const history = useHistory();
 	const dispatch = useDispatch();
 	const postFromRedux = useSelector((state) => state.posts[id]);
 	const [ post, setPost ] = useState(postFromRedux);
 	const handleRemove = () => {
 		dispatch(removePostAndTitle(id));
+		history.push('/');
 	};
 
 	const updateBlog = (values) => {
