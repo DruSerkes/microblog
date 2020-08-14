@@ -4,13 +4,13 @@ const INITIAL_STATE = {};
 const titleReducer = (state = INITIAL_STATE, action) => {
 	switch (action.type) {
 		case ADD_TITLE:
-			return { ...state, titles: { ...state.titles, [action.id]: action.title } };
+			return { ...state, [action.id]: action.title };
 		case REMOVE_TITLE:
-			const updatedTitles = { ...state.titles };
+			const updatedTitles = { ...state };
 			delete updatedTitles[action.id];
-			return { ...state, titles: updatedTitles };
+			return { updatedTitles };
 		case EDIT_TITLE:
-			return { ...state, titles: { ...state.titles, [action.id]: action.title } };
+			return { ...state, [action.id]: action.title };
 		default:
 			return state;
 	}
