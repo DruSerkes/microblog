@@ -9,6 +9,8 @@ import {
 	REMOVE_TITLE
 } from './actionTypes';
 
+const BASE_URL = 'http://localhost:5000/api/posts';
+
 export function addPostAndTitle({ id, title, description, body }) {
 	return function(dispatch) {
 		const newTitle = { id, title, description };
