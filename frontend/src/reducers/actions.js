@@ -123,23 +123,10 @@ export function removeFromComments(post_id, comment_id) {
 	};
 }
 
-// export function getFromComments(post_id) {
-// 	return async function(dispatch) {
-// 		try{
-// 			const res = await axios.get(`${BASE_URL}/${post_id}/comments/`)
-
-// 		} catch(e) {
-// 			console.log(e)
-// 		}
-// 	}
-// }
-
 export function vote(post_id, direction) {
 	return async function(dispatch) {
 		try {
-			// console.log('INSITE VOTE: post_id === ', post_id);
 			const res = await axios.post(`${BASE_URL}/${post_id}/vote/${direction}`);
-			// console.log('INSITE VOTE: res.data === ', res.data.votes);
 			dispatch(updateVotes(post_id, res.data.votes));
 		} catch (e) {
 			console.log(e);

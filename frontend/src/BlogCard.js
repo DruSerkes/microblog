@@ -1,17 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { vote } from './reducers/actions';
 import { faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const BlogCard = ({ title, description, id, votes }) => {
-	const dispatch = useDispatch();
+const BlogCard = ({ title, description, id, votes, upVote, downVote }) => {
 	const handleUpVote = () => {
-		dispatch(vote(id, 'up'));
+		upVote(id);
 	};
 	const handleDownVote = () => {
-		dispatch(vote(id, 'down'));
+		downVote(id);
 	};
 
 	return (
