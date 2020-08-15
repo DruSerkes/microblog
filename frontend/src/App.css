@@ -73,6 +73,11 @@ a {
 	background-color: rgb(230, 227, 227);
 }
 
+.BlogDetails span {
+	font-size: 0.7rem;
+	font-weight: 400;
+}
+
 button {
 	border: 1px solid indigo;
 	background-color: indigo;

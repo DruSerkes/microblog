@@ -5,7 +5,7 @@ import CommentForm from './CommentForm';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
 import { removePostAndTitle, editPostAndTitle, addToComments, removeFromComments, getPost } from './reducers/actions';
 
 const BlogDetails = () => {
@@ -13,7 +13,7 @@ const BlogDetails = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	let postFromRedux = useSelector((state) => state.posts[id]) || {};
-	const { title, description, body, comments } = postFromRedux;
+	const { title, description, body, comments, votes } = postFromRedux;
 
 	useEffect(
 		() => {
@@ -61,15 +61,38 @@ const BlogDetails = () => {
 			<div className="BlogDetails-Edit-BlogForm" style={{ display: 'none' }}>
 				<BlogForm title={title} description={description} body={body} id={id} saveBlog={updateBlog} />
 			</div>
-			<h2>{title}</h2>
-			<p className="BlogDetails-Icons">
-				<button onClick={toggleEditForm}>
-					<FontAwesomeIcon icon={faEdit} />
-				</button>
-				<button onClick={handleRemove}>
-					<FontAwesomeIcon icon={faTrashAlt} />
-				</button>
-			</p>
+			<h2>
+				{title}
+				<span>
+					<br />
+					{votes} votes
+					<button>
+						<FontAwesomeIcon icon={faThumbsUp} />
+					</button>
+					<button>
+						<FontAwesomeIcon icon={faThumbsDown} />
+					</button>
+				</span>
+			</h2>
+			<div className="BlogDetails-Icons">
+				<span>
+					<button onClick={toggleEditForm}>
+						<FontAwesomeIcon icon={faEdit} />
+					</button>
+					<button onClick={handleRemove}>
+						<FontAwesomeIcon icon={faTrashAlt} />
+					</button>
+				</span>
+				{/* <span>
+					{votes} votes
+					<button>
+						<FontAwesomeIcon icon={faThumbsUp} />
+					</button>
+					<button>
+						<FontAwesomeIcon icon={faThumbsDown} />
+					</button>
+				</span> */}
+			</div>
 			<p>
 				<em>{description}</em>
 			</p>
