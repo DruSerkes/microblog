@@ -12,18 +12,16 @@ const BlogDetails = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const postFromRedux = useSelector((state) => state.posts[id]) || {};
-	console.log(postFromRedux);
-	const [ comments, setComments ] = useState([]);
+	let postFromRedux = useSelector((state) => state.posts[id]) || {};
+	const { title, description, body, comments } = postFromRedux;
 
 	useEffect(
 		() => {
-			console.log('dispatching for post');
 			dispatch(getPost(id));
-			if (postFromRedux.comments) setComments(postFromRedux.comments);
 		},
-		[ dispatch, id ]
+		[ dispatch, id, comments ]
 	);
+
 	const handleRemove = () => {
 		dispatch(removePostAndTitle(id));
 		history.push('/');
@@ -48,8 +46,6 @@ const BlogDetails = () => {
 	);
 
 	if (!postFromRedux) return <h3>Sorry, we can't find your post!</h3>;
-
-	const { title, description, body } = postFromRedux;
 
 	const toggleEditForm = () => {
 		const form = document.querySelector('.BlogDetails-Edit-BlogForm');
@@ -78,7 +74,7 @@ const BlogDetails = () => {
 				<em>{description}</em>
 			</p>
 			<p>{body}</p>
-			<Comments id={id} comments={comments} removeComment={handleRemoveComment} />
+			{comments ? <Comments id={id} comments={comments} removeComment={handleRemoveComment} /> : null}
 			<CommentForm addComment={handleAddComment} />
 		</div>
 	);
