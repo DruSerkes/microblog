@@ -6,7 +6,14 @@ import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
-import { removePostAndTitle, editPostAndTitle, addToComments, removeFromComments, getPost } from './reducers/actions';
+import {
+	removePostAndTitle,
+	editPostAndTitle,
+	addToComments,
+	removeFromComments,
+	getPost,
+	vote
+} from './reducers/actions';
 
 const BlogDetails = () => {
 	const { id } = useParams();
@@ -14,6 +21,14 @@ const BlogDetails = () => {
 	const dispatch = useDispatch();
 	let postFromRedux = useSelector((state) => state.posts[id], shallowEqual) || {};
 	const { title, description, body, comments, votes } = postFromRedux;
+
+	const upVote = (post_id) => {
+		dispatch(vote(post_id, 'up'));
+	};
+
+	const downVote = (post_id) => {
+		dispatch(vote(post_id, 'down'));
+	};
 
 	useEffect(
 		() => {
@@ -66,10 +81,10 @@ const BlogDetails = () => {
 				<span>
 					<br />
 					{votes} votes
-					<button>
+					<button onClick={() => upVote(id)}>
 						<FontAwesomeIcon icon={faThumbsUp} />
 					</button>
-					<button>
+					<button onClick={() => downVote(id)}>
 						<FontAwesomeIcon icon={faThumbsDown} />
 					</button>
 				</span>
