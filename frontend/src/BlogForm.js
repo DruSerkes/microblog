@@ -11,11 +11,6 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 	const history = useHistory();
 
 	const handleSubmit = (values, { setSubmitting }) => {
-		// if (!id) {
-		// 	values.id = uuid();
-		// } else {
-		// 	values.id = id;
-		// }
 		values.id = id;
 		saveBlog(values);
 		setSubmitting(false);

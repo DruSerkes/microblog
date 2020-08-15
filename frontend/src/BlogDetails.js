@@ -13,16 +13,11 @@ const BlogDetails = () => {
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const postFromRedux = useSelector((state) => state.posts[id]);
-	// const [ post, setPost ] = useState(postFromRedux);
-	// console.log('postFromRedux === ', postFromRedux);
-	// console.log('post === ', post);
 
 	useEffect(
 		() => {
 			console.log('dispatching for post');
 			dispatch(getPost(id));
-			// setPost({ postFromRedux });
-			// console.log('post === ', post);
 		},
 		[ dispatch, id ]
 	);
@@ -38,7 +33,6 @@ const BlogDetails = () => {
 	const handleAddComment = useCallback(
 		(comment) => {
 			dispatch(addComment(id, comment));
-			// setPost({ ...postFromRedux });
 		},
 		[ dispatch, id ]
 	);
@@ -46,7 +40,6 @@ const BlogDetails = () => {
 	const handleRemoveComment = useCallback(
 		(postId, commentId) => {
 			dispatch(removeComment(postId, commentId));
-			// setPost({ ...postFromRedux});
 		},
 		[ dispatch ]
 	);

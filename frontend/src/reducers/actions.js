@@ -101,18 +101,28 @@ export function removePost(id) {
 	};
 }
 
-export function addComment(id, comment) {
+/* Comment functions */
+
+export function addToComments(post_id, text) {
+	return async function(dispatch) {
+		const data = { text };
+		const res = await axios.post(`${BASE_URL}/${post_id}/comments/`, data);
+		dispatch(addComment(post_id, res.data));
+	};
+}
+
+export function addComment(post_id, comment) {
 	return {
 		type    : ADD_COMMENT,
-		id,
+		post_id,
 		comment
 	};
 }
 
-export function removeComment(id, commentId) {
+export function removeComment(post_id, commentId) {
 	return {
 		type      : REMOVE_COMMENT,
-		id,
+		post_id,
 		commentId
 	};
 }
