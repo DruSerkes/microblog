@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 import validationSchema from './blogSchema';
 import FormikInput from './FormikInput';
 import MyTextArea from './FormikArea';
@@ -11,11 +11,11 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 	const history = useHistory();
 
 	const handleSubmit = (values, { setSubmitting }) => {
-		if (!id) {
-			values.id = uuid();
-		} else {
-			values.id = id;
-		}
+		// if (!id) {
+		// 	values.id = uuid();
+		// } else {
+		// 	values.id = id;
+		// }
 		saveBlog(values);
 		setSubmitting(false);
 		history.push('/');

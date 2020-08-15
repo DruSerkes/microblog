@@ -19,7 +19,7 @@ const BlogDetails = () => {
 
 	useEffect(
 		() => {
-			console.log('dispatching');
+			console.log('dispatching for post');
 			dispatch(getPost(id));
 			// setPost({ postFromRedux });
 			// console.log('post === ', post);

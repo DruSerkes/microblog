@@ -44,9 +44,14 @@ export function editPostAndTitle({ id, title, description, body }) {
 }
 
 export function removePostAndTitle(id) {
-	return function(dispatch) {
-		dispatch(removePost(id));
-		dispatch(removeTitle(id));
+	return async function(dispatch) {
+		try {
+			await axios.delete(`${BASE_URL}/${id}`);
+			dispatch(removePost(id));
+			dispatch(removeTitle(id));
+		} catch (e) {
+			console.log(e);
+		}
 	};
 }
 
