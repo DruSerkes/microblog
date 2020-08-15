@@ -22,12 +22,12 @@ const postReducer = (state = INITIAL_STATE, action) => {
 		case ADD_COMMENT:
 			const postToAddTo = state[action.post_id];
 			postToAddTo.comments = [ ...postToAddTo.comments, action.comment ];
-			return { ...state, [action.id]: postToAddTo };
+			return { ...state, [action.post_id]: postToAddTo };
 		case REMOVE_COMMENT:
 			const postToRemoveFrom = state[action.post_id];
 			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
 			postToRemoveFrom.comments = newComments;
-			return { ...state, [action.id]: postToRemoveFrom };
+			return { ...state, [action.post_id]: postToRemoveFrom };
 		default:
 			return state;
 	}

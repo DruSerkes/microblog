@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import BlogForm from './BlogForm';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
@@ -12,12 +12,15 @@ const BlogDetails = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	const postFromRedux = useSelector((state) => state.posts[id]);
+	const postFromRedux = useSelector((state) => state.posts[id]) || {};
+	console.log(postFromRedux);
+	const [ comments, setComments ] = useState([]);
 
 	useEffect(
 		() => {
 			console.log('dispatching for post');
 			dispatch(getPost(id));
+			if (postFromRedux.comments) setComments(postFromRedux.comments);
 		},
 		[ dispatch, id ]
 	);
@@ -75,7 +78,7 @@ const BlogDetails = () => {
 				<em>{description}</em>
 			</p>
 			<p>{body}</p>
-			<Comments id={id} comments={postFromRedux.comments} removeComment={handleRemoveComment} />
+			<Comments id={id} comments={comments} removeComment={handleRemoveComment} />
 			<CommentForm addComment={handleAddComment} />
 		</div>
 	);

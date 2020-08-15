@@ -122,6 +122,17 @@ export function removeFromComments(post_id, comment_id) {
 	};
 }
 
+// export function getFromComments(post_id) {
+// 	return async function(dispatch) {
+// 		try{
+// 			const res = await axios.get(`${BASE_URL}/${post_id}/comments/`)
+
+// 		} catch(e) {
+// 			console.log(e)
+// 		}
+// 	}
+// }
+
 export function addComment(post_id, comment) {
 	return {
 		type    : ADD_COMMENT,

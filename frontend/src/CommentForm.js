@@ -1,6 +1,5 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-// import { v4 as uuid } from 'uuid';
 import FormikInput from './FormikInput';
 import commentSchema from './commentSchema';
 
