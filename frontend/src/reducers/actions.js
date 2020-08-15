@@ -111,6 +111,17 @@ export function addToComments(post_id, text) {
 	};
 }
 
+export function removeFromComments(post_id, comment_id) {
+	return async function(dispatch) {
+		try {
+			await axios.delete(`${BASE_URL}/${post_id}/comments/${comment_id}`);
+			dispatch(removeComment(post_id, comment_id));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+}
+
 export function addComment(post_id, comment) {
 	return {
 		type    : ADD_COMMENT,
