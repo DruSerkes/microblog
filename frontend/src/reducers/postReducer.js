@@ -1,4 +1,4 @@
-import { ADD_POST, EDIT_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT } from './actionTypes';
+import { ADD_POST, VOTE, EDIT_POST, REMOVE_POST, ADD_COMMENT, REMOVE_COMMENT } from './actionTypes';
 const INITIAL_STATE = {};
 
 const postReducer = (state = INITIAL_STATE, action) => {
@@ -28,7 +28,7 @@ const postReducer = (state = INITIAL_STATE, action) => {
 			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
 			postToRemoveFrom.comments = newComments;
 			return { ...state, [action.post_id]: postToRemoveFrom };
-		case "CHANGE_LIKES":
+		case VOTE:
 			const 
 		default:
 			return state;

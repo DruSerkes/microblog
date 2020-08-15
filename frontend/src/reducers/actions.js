@@ -6,7 +6,8 @@ import {
 	EDIT_POST,
 	ADD_TITLE,
 	EDIT_TITLE,
-	REMOVE_TITLE
+	REMOVE_TITLE,
+	VOTE
 } from './actionTypes';
 import axios from 'axios';
 
@@ -132,6 +133,25 @@ export function removeFromComments(post_id, comment_id) {
 // 		}
 // 	}
 // }
+
+export function vote(post_id, direction) {
+	return async function(dispatch) {
+		try {
+			const res = await axios.post(`${BASE_URL}/${post_id}/vote/${direction}`);
+			dispatch(updateVotes(post_id, votes));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+}
+
+export function updateVotes(post_id, votes) {
+	return {
+		type    : VOTE,
+		post_id,
+		votes
+	};
+}
 
 export function addComment(post_id, comment) {
 	return {
