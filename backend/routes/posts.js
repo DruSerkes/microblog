@@ -1,7 +1,7 @@
 /** API routes for posts. */
 
-const db = require("../db");
-const express = require("express");
+const db = require('../db');
+const express = require('express');
 const router = new express.Router();
 
 /** GET /   get overview of posts
@@ -18,21 +18,21 @@ const router = new express.Router();
  *
  */
 
-router.get("/", async function (req, res, next) {
-  try {
-    const result = await db.query(
-      `SELECT p.id,
+router.get('/', async function(req, res, next) {
+	try {
+		const result = await db.query(
+			`SELECT p.id,
               p.title,
               p.description,
               p.votes
       FROM posts p 
       ORDER BY p.id
       `
-    );
-    return res.json(result.rows);
-  } catch (err) {
-    return next(err);
-  }
+		);
+		return res.json(result.rows);
+	} catch (err) {
+		return next(err);
+	}
 });
 
 /** GET /[id]  get detail on post w/comments
@@ -48,10 +48,10 @@ router.get("/", async function (req, res, next) {
  *      }
  */
 
-router.get("/:id", async function (req, res, next) {
-  try {
-    const result = await db.query(
-      `SELECT p.id,
+router.get('/:id', async function(req, res, next) {
+	try {
+		const result = await db.query(
+			`SELECT p.id,
               p.title,
               p.description,
               p.body,
@@ -65,14 +65,14 @@ router.get("/:id", async function (req, res, next) {
       
       GROUP BY p.id    
       ORDER BY p.id
-      `, [req.params.id]
-    );
-    return res.json(result.rows[0]);
-  } catch (err) {
-    return next(err);
-  }
+      `,
+			[ req.params.id ]
+		);
+		return res.json(result.rows[0]);
+	} catch (err) {
+		return next(err);
+	}
 });
-
 
 /** POST /[id]/vote/(up|down)    Update up/down as post
  *
@@ -80,18 +80,18 @@ router.get("/:id", async function (req, res, next) {
  *
  */
 
-router.post("/:id/vote/:direction", async function (req, res, next) {
-  try {
-    let delta = req.params.direction === "up" ? +1 : -1;
-    const result = await db.query(
-      "UPDATE posts SET votes=votes + $1 WHERE id = $2 RETURNING votes",
-      [delta, req.params.id]);
-    return res.json(result.rows[0]);
-  } catch (err) {
-    return next(err);
-  }
+router.post('/:id/vote/:direction', async function(req, res, next) {
+	try {
+		let delta = req.params.direction === 'up' ? +1 : -1;
+		const result = await db.query('UPDATE posts SET votes=votes + $1 WHERE id = $2 RETURNING votes', [
+			delta,
+			req.params.id
+		]);
+		return res.json(result.rows[0]);
+	} catch (err) {
+		return next(err);
+	}
 });
-
 
 /** POST /     add a new post
  *
@@ -99,20 +99,20 @@ router.post("/:id/vote/:direction", async function (req, res, next) {
  *
  */
 
-router.post("/", async function (req, res, next) {
-  try {
-    const {title, body, description} = req.body;
-    const result = await db.query(
-      `INSERT INTO posts (title, description, body) 
+router.post('/', async function(req, res, next) {
+	try {
+		const { title, body, description } = req.body;
+		const result = await db.query(
+			`INSERT INTO posts (title, description, body) 
         VALUES ($1, $2, $3) 
         RETURNING id, title, description, body, votes`,
-      [title, description, body]);
-    return res.status(201).json(result.rows[0]);
-  } catch (err) {
-    return next(err);
-  }
+			[ title, description, body ]
+		);
+		return res.status(201).json(result.rows[0]);
+	} catch (err) {
+		return next(err);
+	}
 });
-
 
 /** PUT /[id]     update existing post
  *
@@ -120,20 +120,20 @@ router.post("/", async function (req, res, next) {
  *
  */
 
-router.put("/:id", async function (req, res, next) {
-  try {
-    const {title, body, description} = req.body;
-    const result = await db.query(
-      `UPDATE posts SET title=$1, description=$2, body=$3
+router.put('/:id', async function(req, res, next) {
+	try {
+		const { title, body, description } = req.body;
+		const result = await db.query(
+			`UPDATE posts SET title=$1, description=$2, body=$3
         WHERE id = $4 
         RETURNING id, title, description, body, votes`,
-      [title, description, body, req.params.id]);
-    return res.json(result.rows[0]);
-  } catch (e) {
-    return next(e);
-  }
+			[ title, description, body, req.params.id ]
+		);
+		return res.json(result.rows[0]);
+	} catch (e) {
+		return next(e);
+	}
 });
-
 
 /** DELETE /[id]     delete post
  *
@@ -141,14 +141,13 @@ router.put("/:id", async function (req, res, next) {
  *
  */
 
-router.delete("/:id", async (req, res, next) => {
-  try {
-    await db.query("DELETE FROM posts WHERE id = $1", [req.params.id]);
-    return res.json({ message: "deleted" });
-  } catch (err) {
-    return next(err);
-  }
+router.delete('/:id', async (req, res, next) => {
+	try {
+		await db.query('DELETE FROM posts WHERE id = $1', [ req.params.id ]);
+		return res.json({ message: 'deleted' });
+	} catch (err) {
+		return next(err);
+	}
 });
-
 
 module.exports = router;
