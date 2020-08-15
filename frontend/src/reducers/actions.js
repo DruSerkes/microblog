@@ -8,8 +8,17 @@ import {
 	EDIT_TITLE,
 	REMOVE_TITLE
 } from './actionTypes';
+import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000/api/posts';
+
+export function getTitles() {
+	return async function(dispatch) {
+		const res = await axios.get(BASE_URL);
+		console.log(res.data);
+		res.data.forEach((post) => dispatch(addTitle(post.id, post)));
+	};
+}
 
 export function addPostAndTitle({ id, title, description, body }) {
 	return function(dispatch) {
