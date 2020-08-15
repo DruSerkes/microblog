@@ -16,6 +16,7 @@ const BlogForm = ({ title = '', description = '', body = '', id, saveBlog }) => 
 		// } else {
 		// 	values.id = id;
 		// }
+		values.id = id;
 		saveBlog(values);
 		setSubmitting(false);
 		history.push('/');
