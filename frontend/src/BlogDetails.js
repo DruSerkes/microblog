@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { removePostAndTitle, editPostAndTitle, addComment, removeComment, getPost } from './reducers/actions';
+import { removePostAndTitle, editPostAndTitle, addToComments, removeFromComments, getPost } from './reducers/actions';
 
 const BlogDetails = () => {
 	const { id } = useParams();
@@ -31,15 +31,15 @@ const BlogDetails = () => {
 	};
 
 	const handleAddComment = useCallback(
-		(comment) => {
-			dispatch(addComment(id, comment));
+		(text) => {
+			dispatch(addToComments(id, text));
 		},
 		[ dispatch, id ]
 	);
 
 	const handleRemoveComment = useCallback(
 		(postId, commentId) => {
-			dispatch(removeComment(postId, commentId));
+			dispatch(removeFromComments(postId, commentId));
 		},
 		[ dispatch ]
 	);

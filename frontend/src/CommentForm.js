@@ -1,14 +1,12 @@
 import React from 'react';
 import { Formik, Form } from 'formik';
-import { v4 as uuid } from 'uuid';
+// import { v4 as uuid } from 'uuid';
 import FormikInput from './FormikInput';
 import commentSchema from './commentSchema';
 
-const CommentForm = ({ id, addComment }) => {
+const CommentForm = ({ addComment }) => {
 	const handleSubmit = (values, { setSubmitting, resetForm }) => {
-		const commentId = uuid();
-		values.id = commentId;
-		addComment(values);
+		addComment(values.text);
 		setSubmitting(false);
 		resetForm();
 	};
