@@ -138,7 +138,7 @@ export function vote(post_id, direction) {
 	return async function(dispatch) {
 		try {
 			const res = await axios.post(`${BASE_URL}/${post_id}/vote/${direction}`);
-			dispatch(updateVotes(post_id, votes));
+			dispatch(updateVotes(post_id, res.data));
 		} catch (e) {
 			console.log(e);
 		}
