@@ -15,8 +15,14 @@ const BASE_URL = 'http://localhost:5000/api/posts';
 export function getTitles() {
 	return async function(dispatch) {
 		const res = await axios.get(BASE_URL);
-		console.log(res.data);
-		res.data.forEach((post) => dispatch(addTitle(post.id, post)));
+		res.data.forEach((post) => dispatch(gotTitle(post.id, post)));
+	};
+}
+
+export function getPost(id) {
+	return async function(dispatch) {
+		const res = await axios.get(`${BASE_URL}/${id}`);
+		dispatch(gotPost(res.data.id, res.data));
 	};
 }
 
@@ -24,8 +30,8 @@ export function addPostAndTitle({ id, title, description, body }) {
 	return function(dispatch) {
 		const newTitle = { id, title, description };
 		const post = { id, title, description, body, comments: [] };
-		dispatch(addPost(id, post));
-		dispatch(addTitle(id, newTitle));
+		dispatch(gotPost(id, post));
+		dispatch(gotTitle(id, newTitle));
 	};
 }
 
@@ -45,7 +51,7 @@ export function removePostAndTitle(id) {
 	};
 }
 
-export function addTitle(id, title) {
+export function gotTitle(id, title) {
 	return {
 		type  : ADD_TITLE,
 		id,
@@ -68,7 +74,7 @@ export function removeTitle(id) {
 	};
 }
 
-export function addPost(id, post) {
+export function gotPost(id, post) {
 	return {
 		type : ADD_POST,
 		post,
