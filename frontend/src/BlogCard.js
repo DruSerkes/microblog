@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const BlogCard = ({ title, description, id }) => {
+const BlogCard = ({ title, description, id, votes }) => {
 	return (
 		<div className="BlogCard">
 			<h4>
