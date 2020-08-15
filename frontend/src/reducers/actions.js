@@ -35,11 +35,11 @@ export function addPostAndTitle({ title, description, body }) {
 }
 
 export function editPostAndTitle({ id, title, description, body }) {
-	return function(dispatch) {
-		const newTitle = { id, title, description };
-		const post = { id, title, description, body };
-		dispatch(editPost(id, post));
-		dispatch(editTitle(id, newTitle));
+	return async function(dispatch) {
+		const data = { title, description, body };
+		const res = await axios.put(`${BASE_URL}/${id}`, data);
+		dispatch(editPost(res.data.id, res.data));
+		dispatch(editTitle(res.data.id, res.data));
 	};
 }
 
