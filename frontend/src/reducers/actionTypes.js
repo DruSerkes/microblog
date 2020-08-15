@@ -9,3 +9,5 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const ADD_TITLE = 'ADD_TITLE';
 export const EDIT_TITLE = 'EDIT_TITLE';
 export const REMOVE_TITLE = 'REMOVE_TITLE';
+// LIKES
+export const VOTE = 'VOTE';

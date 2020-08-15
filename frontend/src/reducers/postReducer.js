@@ -28,6 +28,8 @@ const postReducer = (state = INITIAL_STATE, action) => {
 			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
 			postToRemoveFrom.comments = newComments;
 			return { ...state, [action.post_id]: postToRemoveFrom };
+		case "CHANGE_LIKES":
+			const 
 		default:
 			return state;
 	}
