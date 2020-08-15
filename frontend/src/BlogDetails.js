@@ -19,7 +19,7 @@ const BlogDetails = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	let postFromRedux = useSelector((state) => state.posts[id], shallowEqual) || {};
+	const postFromRedux = useSelector((state) => state.posts[id], shallowEqual) || {};
 	const { title, description, body, comments, votes } = postFromRedux;
 
 	const upVote = (post_id) => {
