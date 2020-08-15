@@ -137,8 +137,10 @@ export function removeFromComments(post_id, comment_id) {
 export function vote(post_id, direction) {
 	return async function(dispatch) {
 		try {
+			// console.log('INSITE VOTE: post_id === ', post_id);
 			const res = await axios.post(`${BASE_URL}/${post_id}/vote/${direction}`);
-			dispatch(updateVotes(post_id, res.data));
+			// console.log('INSITE VOTE: res.data === ', res.data.votes);
+			dispatch(updateVotes(post_id, res.data.votes));
 		} catch (e) {
 			console.log(e);
 		}

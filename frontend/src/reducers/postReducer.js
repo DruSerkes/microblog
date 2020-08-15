@@ -20,18 +20,32 @@ const postReducer = (state = INITIAL_STATE, action) => {
 				}
 			};
 		case ADD_COMMENT:
-			const postToAddTo = state[action.post_id];
-			postToAddTo.comments = [ ...postToAddTo.comments, action.comment ];
-			return { ...state, [action.post_id]: { ...postToAddTo } };
+			return {
+				...state,
+				[action.post_id]: {
+					...state[action.post_id],
+					comments : [ ...state[action.post_id].comments, action.comment ]
+				}
+			};
 		case REMOVE_COMMENT:
 			const postToRemoveFrom = state[action.post_id];
 			const newComments = postToRemoveFrom.comments.filter((comment) => comment.id !== action.commentId);
 			postToRemoveFrom.comments = newComments;
-			return { ...state, [action.post_id]: { ...postToRemoveFrom } };
+			return {
+				...state,
+				[action.post_id]: {
+					...state[action.post_id],
+					comments : [ ...newComments ]
+				}
+			};
 		case VOTE:
-			const postToUpdateVotes = state[action.post_id];
-			postToUpdateVotes.votes = action.votes;
-			return { ...state, [action.post_id]: { ...postToUpdateVotes } };
+			return {
+				...state,
+				[action.post_id]: {
+					...state[action.post_id],
+					votes : action.votes
+				}
+			};
 		default:
 			return state;
 	}
