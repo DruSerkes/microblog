@@ -1,8 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import BlogForm from './BlogForm';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit, faThumbsUp, faThumbsDown } from '@fortawesome/free-solid-svg-icons';
@@ -12,14 +12,14 @@ const BlogDetails = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
-	let postFromRedux = useSelector((state) => state.posts[id]) || {};
+	let postFromRedux = useSelector((state) => state.posts[id], shallowEqual) || {};
 	const { title, description, body, comments, votes } = postFromRedux;
 
 	useEffect(
 		() => {
 			dispatch(getPost(id));
 		},
-		[ dispatch, id, comments ]
+		[ dispatch, id ]
 	);
 
 	const handleRemove = () => {
