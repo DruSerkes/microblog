@@ -26,12 +26,11 @@ export function getPost(id) {
 	};
 }
 
-export function addPostAndTitle({ id, title, description, body }) {
-	return function(dispatch) {
-		const newTitle = { id, title, description };
-		const post = { id, title, description, body, comments: [] };
-		dispatch(gotPost(id, post));
-		dispatch(gotTitle(id, newTitle));
+export function addPostAndTitle({ title, description, body }) {
+	return async function(dispatch) {
+		const data = { title, description, body };
+		const res = await axios.post(BASE_URL, data);
+		dispatch(gotPost(res.data.id, res.data));
 	};
 }
 

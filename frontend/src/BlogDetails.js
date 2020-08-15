@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import BlogForm from './BlogForm';
 import Comments from './Comments';
 import CommentForm from './CommentForm';
@@ -6,14 +6,26 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams, useHistory } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
-import { removePostAndTitle, editPostAndTitle, addComment, removeComment } from './reducers/actions';
+import { removePostAndTitle, editPostAndTitle, addComment, removeComment, getPost } from './reducers/actions';
 
 const BlogDetails = () => {
 	const { id } = useParams();
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const postFromRedux = useSelector((state) => state.posts[id]);
-	const [ post, setPost ] = useState(postFromRedux);
+	// const [ post, setPost ] = useState(postFromRedux);
+	// console.log('postFromRedux === ', postFromRedux);
+	// console.log('post === ', post);
+
+	useEffect(
+		() => {
+			console.log('dispatching');
+			dispatch(getPost(id));
+			// setPost({ postFromRedux });
+			// console.log('post === ', post);
+		},
+		[ dispatch, id ]
+	);
 	const handleRemove = () => {
 		dispatch(removePostAndTitle(id));
 		history.push('/');
@@ -26,22 +38,22 @@ const BlogDetails = () => {
 	const handleAddComment = useCallback(
 		(comment) => {
 			dispatch(addComment(id, comment));
-			setPost({ ...postFromRedux });
+			// setPost({ ...postFromRedux });
 		},
-		[ dispatch, id, postFromRedux ]
+		[ dispatch, id ]
 	);
 
 	const handleRemoveComment = useCallback(
 		(postId, commentId) => {
 			dispatch(removeComment(postId, commentId));
-			setPost({ ...postFromRedux });
+			// setPost({ ...postFromRedux});
 		},
-		[ dispatch, postFromRedux ]
+		[ dispatch ]
 	);
 
 	if (!postFromRedux) return <h3>Sorry, we can't find your post!</h3>;
 
-	const { title, description, body } = post;
+	const { title, description, body } = postFromRedux;
 
 	const toggleEditForm = () => {
 		const form = document.querySelector('.BlogDetails-Edit-BlogForm');
@@ -70,7 +82,7 @@ const BlogDetails = () => {
 				<em>{description}</em>
 			</p>
 			<p>{body}</p>
-			<Comments id={id} comments={post.comments} removeComment={handleRemoveComment} />
+			<Comments id={id} comments={postFromRedux.comments} removeComment={handleRemoveComment} />
 			<CommentForm addComment={handleAddComment} />
 		</div>
 	);
