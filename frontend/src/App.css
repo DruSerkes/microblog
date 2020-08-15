@@ -1,3 +1,7 @@
+.html {
+	width: 100%;
+}
+
 .App {
 	text-align: center;
 }
@@ -35,10 +39,16 @@ a {
 	padding: 2rem;
 }
 
+.Homepage {
+	margin: 0 auto;
+}
+
 .BlogList {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
+	text-align: center;
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+	margin: 0 auto;
 }
 
 .BlogCard {
@@ -46,6 +56,21 @@ a {
 	border-radius: 5px;
 	margin: 2rem;
 	padding: 2rem;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.BlogCard-Votes {
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	border-radius: 4px;
+	width: 100%;
+	border-top: 1px solid grey;
+	background-color: rgb(230, 227, 227);
 }
 
 button {
